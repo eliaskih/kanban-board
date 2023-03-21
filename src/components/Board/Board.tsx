@@ -1,38 +1,24 @@
 import React from "react";
 import Ticket from "../Ticket/Ticket";
 import "./Board.scss";
+import { useBoardContext } from "../../context/BoardsContext";
 
 export default function Board() {
+  const { currentProject } = useBoardContext();
   return (
     <div className="board">
-      <div className="board-column">
-        <div className="board-title">
-          <div className="board-title-icon todo"></div>
-          <h4>todo</h4>
+      {currentProject.board.map((column) => (
+        <div className="board-column">
+          <div className="board-title">
+            <div className="board-title-icon todo"></div>
+            <h4>todo</h4>
+          </div>
+
+          {column.tickets.map((ticket) => (
+            <Ticket />
+          ))}
         </div>
-        <Ticket />
-        <Ticket />
-        <Ticket />
-      </div>
-      <div className="board-column">
-        <div className="board-title">
-          <div className="board-title-icon doing"></div>
-          <h4>doing</h4>
-        </div>
-        <Ticket />
-        <Ticket />
-      </div>
-      <div className="board-column">
-        <div className="board-title">
-          <div className="board-title-icon done"></div>
-          <h4>done</h4>
-        </div>
-        <Ticket />
-        <Ticket />
-        <Ticket />
-        <Ticket />
-        <Ticket />
-      </div>
+      ))}
     </div>
   );
 }
